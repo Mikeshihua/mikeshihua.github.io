@@ -95,7 +95,7 @@
 <meta property="og:site_name" content="mikeshihua">
 <meta property="og:description" content="Nodejs 和 iOS 中 RSA 和 AES 加解密的一些问题在使用Nodejs 和 iOS 上系统库代码加密时，遇到了两个平台加密的得到的内容不一致的问题。包括 AES 相同密码加密的内容不一致，相同密钥对 RSA 签名不一致的问题，下面是一些解决方法。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-09T13:36:53.000Z">
+<meta property="og:updated_time" content="2017-09-09T13:43:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nodejs 和 iOS 中 RSA 和 AES 加解密的一些问题">
 <meta name="twitter:description" content="Nodejs 和 iOS 中 RSA 和 AES 加解密的一些问题在使用Nodejs 和 iOS 上系统库代码加密时，遇到了两个平台加密的得到的内容不一致的问题。包括 AES 相同密码加密的内容不一致，相同密钥对 RSA 签名不一致的问题，下面是一些解决方法。">
@@ -347,9 +347,7 @@
 
       
         <h1 id="Nodejs-和-iOS-中-RSA-和-AES-加解密的一些问题"><a href="#Nodejs-和-iOS-中-RSA-和-AES-加解密的一些问题" class="headerlink" title="Nodejs 和 iOS 中 RSA 和 AES 加解密的一些问题"></a>Nodejs 和 iOS 中 RSA 和 AES 加解密的一些问题</h1><p>在使用Nodejs 和 iOS 上系统库代码加密时，遇到了两个平台加密的得到的内容不一致的问题。包括 AES 相同密码加密的内容不一致，相同密钥对 RSA 签名不一致的问题，下面是一些解决方法。<br><a id="more"></a></p>
-<h2 id="说明及解决办吧"><a href="#说明及解决办吧" class="headerlink" title="说明及解决办吧"></a>说明及解决办吧</h2><p><strong>说明</strong> </p>
-<p>Node 版本 &gt;= 8.0</p>
-<h3 id="AES-加解密结果不一致"><a href="#AES-加解密结果不一致" class="headerlink" title="AES 加解密结果不一致"></a>AES 加解密结果不一致</h3><p>原因：Nodejs 底层使用 OpenSSL，AES 加密时会对密码进行处理，而 iOS 系统库则没有这些处理。Nodejs 的文档中有说明。</p>
+<h2 id="AES-加解密结果不一致"><a href="#AES-加解密结果不一致" class="headerlink" title="AES 加解密结果不一致"></a>AES 加解密结果不一致</h2><p>原因：Nodejs 底层使用 OpenSSL，AES 加密时会对密码进行处理，而 iOS 系统库则没有这些处理。Nodejs 的文档中有说明。</p>
 <blockquote>
 <p>The <code>password</code> is used to derive the cipher key and initialization vector (IV). The value must be either a <code>&#39;latin1&#39;</code> encoded string, a <a href="https://nodejs.org/api/buffer.html" target="_blank" rel="external"><code>Buffer</code></a>, a<code>TypedArray</code>, or a <code>DataView</code>.</p>
 <p>The implementation of <code>crypto.createCipher()</code> derives keys using the OpenSSL function <a href="https://www.openssl.org/docs/man1.0.2/crypto/EVP_BytesToKey.html" target="_blank" rel="external"><code>EVP_BytesToKey</code></a> with the digest algorithm set to MD5, one iteration, and no salt. The lack of salt allows dictionary attacks as the same password always creates the same key. The low iteration count and non-cryptographically secure hash algorithm allow passwords to be tested very rapidly.</p>
@@ -573,7 +571,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Nodejs-和-iOS-中-RSA-和-AES-加解密的一些问题"><span class="nav-number">1.</span> <span class="nav-text">Nodejs 和 iOS 中 RSA 和 AES 加解密的一些问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#说明及解决办吧"><span class="nav-number">1.1.</span> <span class="nav-text">说明及解决办吧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AES-加解密结果不一致"><span class="nav-number">1.1.1.</span> <span class="nav-text">AES 加解密结果不一致</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#验证签名结果不一致"><span class="nav-number">1.2.</span> <span class="nav-text">验证签名结果不一致</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RSA-证书生成"><span class="nav-number">1.3.</span> <span class="nav-text">RSA 证书生成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">1.4.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Nodejs-和-iOS-中-RSA-和-AES-加解密的一些问题"><span class="nav-number">1.</span> <span class="nav-text">Nodejs 和 iOS 中 RSA 和 AES 加解密的一些问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#AES-加解密结果不一致"><span class="nav-number">1.1.</span> <span class="nav-text">AES 加解密结果不一致</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#验证签名结果不一致"><span class="nav-number">1.2.</span> <span class="nav-text">验证签名结果不一致</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RSA-证书生成"><span class="nav-number">1.3.</span> <span class="nav-text">RSA 证书生成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">1.4.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
             
 
           </div>
