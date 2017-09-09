@@ -95,7 +95,7 @@
 <meta property="og:site_name" content="mikeshihua">
 <meta property="og:description" content="Nodejs 和 iOS 中 RSA 和 AES 加解密的一些问题在使用Nodejs 和 iOS 上系统库代码加密时，遇到了两个平台加密的得到的内容不一致的问题。包括 AES 相同密码加密的内容不一致，相同密钥对 RSA 签名不一致的问题，下面是一些解决方法。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-09T13:43:28.000Z">
+<meta property="og:updated_time" content="2017-09-09T13:53:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nodejs 和 iOS 中 RSA 和 AES 加解密的一些问题">
 <meta name="twitter:description" content="Nodejs 和 iOS 中 RSA 和 AES 加解密的一些问题在使用Nodejs 和 iOS 上系统库代码加密时，遇到了两个平台加密的得到的内容不一致的问题。包括 AES 相同密码加密的内容不一致，相同密钥对 RSA 签名不一致的问题，下面是一些解决方法。">
@@ -374,13 +374,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">openssl pkcs12 -export -clcerts -name myserver -inkey \</div><div class="line">private/server-key.pem -in certs/server.cer -out certs/server.p12</div><div class="line"></div><div class="line">openssl x509 -outform der -in certs/server.cer -out server.der</div></pre></td></tr></table></figure>
 <p>导出 pem格式的公钥，在node服务器上使用</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">openssl rsa -pubout -in private/server-key.pem -out public.pem</div></pre></td></tr></table></figure>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://nodejs.org/api/crypto.html#crypto_crypto_createcipheriv_algorithm_key_iv" target="_blank" rel="external">https://nodejs.org/api/crypto.html#crypto_crypto_createcipheriv_algorithm_key_iv</a></p>
-<p><a href="https://my.oschina.net/itblog/blog/651434" target="_blank" rel="external">https://my.oschina.net/itblog/blog/651434</a></p>
-<p><a href="https://github.com/LittoCats/Crypto/blob/master/openssl_rsa_certificate_%E7%94%9F%E6%88%90%E4%B8%8E%E8%BD%AC%E6%8D%A2.md" target="_blank" rel="external">https://github.com/LittoCats/Crypto/blob/master/openssl_rsa_certificate_%E7%94%9F%E6%88%90%E4%B8%8E%E8%BD%AC%E6%8D%A2.md</a></p>
-<p><a href="http://www.cnblogs.com/littleatp/p/5878763.html" target="_blank" rel="external">http://www.cnblogs.com/littleatp/p/5878763.html</a></p>
-<p><a href="http://tool.chacuo.net/cryptaes" target="_blank" rel="external">http://tool.chacuo.net/cryptaes</a></p>
-<p><a href="https://nodejs.org/api/crypto.html#crypto_sign_sign_privatekey_outputformat" target="_blank" rel="external">https://nodejs.org/api/crypto.html#crypto_sign_sign_privatekey_outputformat</a></p>
-<p><a href="http://www.jianshu.com/p/a8b87e436ac7" target="_blank" rel="external">http://www.jianshu.com/p/a8b87e436ac7</a></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://nodejs.org/api/crypto.html#crypto_crypto_createcipheriv_algorithm_key_iv" target="_blank" rel="external">https://nodejs.org/api/crypto.html#crypto_crypto_createcipheriv_algorithm_key_iv</a><br><a href="https://my.oschina.net/itblog/blog/651434" target="_blank" rel="external">https://my.oschina.net/itblog/blog/651434</a><br><a href="https://github.com/LittoCats/Crypto/blob/master/openssl_rsa_certificate_%E7%94%9F%E6%88%90%E4%B8%8E%E8%BD%AC%E6%8D%A2.md" target="_blank" rel="external">https://github.com/LittoCats/Crypto/blob/master/openssl_rsa_certificate_%E7%94%9F%E6%88%90%E4%B8%8E%E8%BD%AC%E6%8D%A2.md</a><br><a href="http://www.cnblogs.com/littleatp/p/5878763.html" target="_blank" rel="external">http://www.cnblogs.com/littleatp/p/5878763.html</a><br><a href="http://tool.chacuo.net/cryptaes" target="_blank" rel="external">http://tool.chacuo.net/cryptaes</a><br><a href="https://nodejs.org/api/crypto.html#crypto_sign_sign_privatekey_outputformat" target="_blank" rel="external">https://nodejs.org/api/crypto.html#crypto_sign_sign_privatekey_outputformat</a><br><a href="http://www.jianshu.com/p/a8b87e436ac7" target="_blank" rel="external">http://www.jianshu.com/p/a8b87e436ac7</a></p>
 
       
     </div>
