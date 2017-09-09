@@ -87,19 +87,18 @@
 
 
 
-<meta name="description" content="介绍在使用逆向中使用LLDB 或者Cycript来进行动态调试时，常常需要查看某个对象有哪些方法和变量，但是没有方便的方法。在通过LLDB下断点时，要通过反汇编找到代码地址以及加上偏移地址才能得到下断点的地址，每次都耗时耗力。下面方法能让你在调试时如虎添翼！
-_shortMethodDescription打印方法及地址就像方法名字一样，这个方法是打印这个对象的简短的方法描述，能打印出类方法、属性、">
+<meta name="description" content="介绍在使用逆向中使用LLDB 或者Cycript来进行动态调试时，常常需要查看某个对象有哪些方法和变量，但是没有方便的方法。在通过LLDB下断点时，要通过反汇编找到代码地址以及加上偏移地址才能得到下断点的地址，每次都耗时耗力。下面方法能让你在调试时如虎添翼！">
+<meta name="keywords" content="iOS逆向,私有方法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS逆向开发中十分有用的私有接口">
 <meta property="og:url" content="http://mikeshihua.github.io/2017/03/03/iOS逆向开发中十分有用的私有接口/index.html">
 <meta property="og:site_name" content="mikeshihua">
-<meta property="og:description" content="介绍在使用逆向中使用LLDB 或者Cycript来进行动态调试时，常常需要查看某个对象有哪些方法和变量，但是没有方便的方法。在通过LLDB下断点时，要通过反汇编找到代码地址以及加上偏移地址才能得到下断点的地址，每次都耗时耗力。下面方法能让你在调试时如虎添翼！
-_shortMethodDescription打印方法及地址就像方法名字一样，这个方法是打印这个对象的简短的方法描述，能打印出类方法、属性、">
-<meta property="og:updated_time" content="2017-03-05T15:47:38.000Z">
+<meta property="og:description" content="介绍在使用逆向中使用LLDB 或者Cycript来进行动态调试时，常常需要查看某个对象有哪些方法和变量，但是没有方便的方法。在通过LLDB下断点时，要通过反汇编找到代码地址以及加上偏移地址才能得到下断点的地址，每次都耗时耗力。下面方法能让你在调试时如虎添翼！">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-09-09T08:51:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS逆向开发中十分有用的私有接口">
-<meta name="twitter:description" content="介绍在使用逆向中使用LLDB 或者Cycript来进行动态调试时，常常需要查看某个对象有哪些方法和变量，但是没有方便的方法。在通过LLDB下断点时，要通过反汇编找到代码地址以及加上偏移地址才能得到下断点的地址，每次都耗时耗力。下面方法能让你在调试时如虎添翼！
-_shortMethodDescription打印方法及地址就像方法名字一样，这个方法是打印这个对象的简短的方法描述，能打印出类方法、属性、">
+<meta name="twitter:description" content="介绍在使用逆向中使用LLDB 或者Cycript来进行动态调试时，常常需要查看某个对象有哪些方法和变量，但是没有方便的方法。在通过LLDB下断点时，要通过反汇编找到代码地址以及加上偏移地址才能得到下断点的地址，每次都耗时耗力。下面方法能让你在调试时如虎添翼！">
 
 
 
@@ -348,6 +347,7 @@ _shortMethodDescription打印方法及地址就像方法名字一样，这个方
 
       
         <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>在使用逆向中使用<code>LLDB</code> 或者<code>Cycript</code>来进行动态调试时，常常需要查看某个对象有哪些方法和变量，但是没有方便的方法。在通过LLDB下断点时，要通过反汇编找到代码地址以及加上偏移地址才能得到下断点的地址，每次都耗时耗力。下面方法能让你在调试时如虎添翼！</p>
+<a id="more"></a>
 <h2 id="shortMethodDescription打印方法及地址"><a href="#shortMethodDescription打印方法及地址" class="headerlink" title="_shortMethodDescription打印方法及地址"></a><code>_shortMethodDescription</code>打印方法及地址</h2><p>就像方法名字一样，这个方法是打印这个对象的简短的方法描述，能打印出类方法、属性、以及对象方法，而括号内的就是他们的地址，可以直接用LLDB来设置断点。如下：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">(lldb) po [[UIApplication sharedApplication] _shortMethodDescription]</div><div class="line">&lt;UIApplication: 0x7faabf101700&gt;:</div><div class="line"><span class="keyword">in</span> UIApplication:</div><div class="line">	Class Methods:</div><div class="line">		+ (Class) safeCategoryBaseClass; (0x127b7294b)</div><div class="line">		+ (void) shouldShowNetworkActivityIndicatorInRemoteApplication:(BOOL)arg1; (0x10d06bba1)</div><div class="line">		...</div><div class="line">		</div><div class="line">	Properties:</div><div class="line">		@property (retain, nonatomic) NSDate* accessibilityLastGesturedTextInputStatusChange;</div><div class="line">		@property (nonatomic, getter=_isDisplayingActivityContinuationUI, setter=_setIsDisplayingActivityContinuationUI:) BOOL isDisplayingActivityContinuationUI;  (@synthesize isDisplayingActivityContinuationUI = _isDisplayingActivityContinuationUI;)</div><div class="line">		...</div><div class="line">	Instance Methods:</div><div class="line">		- (BOOL) _accessibilityAllowsNotificationsDuringSuspension; (0x127b76db0)</div><div class="line">		...</div><div class="line">(UIResponder ...)</div></pre></td></tr></table></figure>
 <p>设置断点</p>
@@ -482,7 +482,7 @@ _shortMethodDescription打印方法及地址就像方法名字一样，这个方
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -500,7 +500,7 @@ _shortMethodDescription打印方法及地址就像方法名字一样，这个方
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
